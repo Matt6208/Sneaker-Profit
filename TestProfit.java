@@ -4,7 +4,6 @@
 
 //this is the test class for Profit project
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class TestProfit
 {  
@@ -59,5 +58,6 @@ public class TestProfit
       {
          System.out.println(profitList[i]);
       }
+      kb.close();
    }
 }

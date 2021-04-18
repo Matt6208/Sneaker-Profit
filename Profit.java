@@ -5,9 +5,6 @@
 // this program is meant to list out in order from greatest to least
 // the profit that could be made on specific websites/apps on a sneaker
 
-//imports
-import java.util.ArrayList;
-
 public abstract class Profit
 {
    //fields
