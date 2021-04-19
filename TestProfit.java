@@ -11,7 +11,7 @@ public class TestProfit
    
    //this method adds places all Profits in order from most profit to least
    //selection sort
-   public static void order(Profit[] profitList, int n)
+   public void order(Profit[] profitList, int n)
    {
       while(n > 1)
       {
@@ -33,6 +33,7 @@ public class TestProfit
    //main test method
    public static void main (String[] args)
    {
+      TestProfit t = new TestProfit();
       int n = 4;
       Profit[] profitList = new Profit[n];
       
@@ -52,7 +53,7 @@ public class TestProfit
       profitList[2] = ebay;
       profitList[3] = facebook;
       
-      order(profitList, n);
+      t.order(profitList, n);
       
       for(int i = profitList.length-1; i >= 0; i--)
       {
