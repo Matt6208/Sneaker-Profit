@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,10 +10,14 @@ public class Gui implements ActionListener{
     private JButton button;
     private JTextField buyPrice;
     private JTextField sellPrice;
-    private static Profit[] profitList;
-    private static int n;
-    private static TestProfit t;
-    //private static Gui g;
+    private Profit[] profitList;
+    private int n = 4;
+    private double buy;
+    private double sell;
+    Grailed grailed = new Grailed(buy, sell);
+    OfferUp offerUp = new OfferUp(buy, sell);
+    EBay ebay = new EBay(buy, sell);
+    Facebook facebook = new Facebook(buy, sell);
 
     public Gui(){
         GridBagLayout gb = new GridBagLayout();
@@ -29,16 +32,35 @@ public class Gui implements ActionListener{
         buyPrice.setPreferredSize(new Dimension(75,30));
         buyPrice.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                
+                try{
+                    double b = Double.parseDouble(buyPrice.getText());
+                    grailed.setBuy(b);
+                    offerUp.setBuy(b);
+                    ebay.setBuy(b);
+                    facebook.setBuy(b);
+                }
+                catch(NumberFormatException ex){
+                    ex.printStackTrace();
+                }
             }
         }
         );
+
         sellPrice = new JTextField();
         sellPrice.setPreferredSize(new Dimension(75,30));
         sellPrice.setPreferredSize(new Dimension(75,30));
         sellPrice.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                
+                try{
+                    Double s = Double.parseDouble(sellPrice.getText());
+                    grailed.setSell(s);
+                    offerUp.setSell(s);
+                    ebay.setSell(s);
+                    facebook.setSell(s);
+                }
+                catch(NumberFormatException ex){
+                    ex.printStackTrace();
+                }
             }
         }
         );
@@ -83,36 +105,38 @@ public class Gui implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             System.out.println("Calculated");
-            t.order(profitList, n);
-            for(int i = profitList.length-1; i >= 0; i--)
-            {
+            this.order(profitList, n);
+            for(int i = profitList.length-1; i >= 0; i--){
                 System.out.println(profitList[i]);
             }
         }
+
+        public void fillProfitsArray(){
+            profitList = new Profit[n];
+            profitList[0] = grailed;
+            profitList[1] = offerUp;
+            profitList[2] = ebay;
+            profitList[3] = facebook;
+        }
+
+        public void order(Profit[] profitList, int n){
+        while(n > 1){
+            int max = 0;
+            for(int k = 1; k < n; k++){
+                if(profitList[k].getProfit() > profitList[max].getProfit()){
+                max = k;
+            }
+         }
+         Profit temp = profitList[max];
+         profitList[max] = profitList[n-1];
+         profitList[n-1] = temp;
+         n--;
+      }
+   }
     public static void main(String args[])
     {
-        new Gui();
-        t = new TestProfit();
-        n = 4;
-        profitList = new Profit[n];
-        
-        Scanner kb = new Scanner(System.in);
-        System.out.println("How much did you buy the shoe for?");
-        double buy = kb.nextDouble();
-        System.out.println("How much do you want to sell the shoe for?");
-        double sell = kb.nextDouble();
-        
-        Grailed grailed = new Grailed(buy, sell);
-        OfferUp offerUp = new OfferUp(buy, sell);
-        EBay ebay = new EBay(buy, sell);
-        Facebook facebook = new Facebook(buy, sell);
-        
-        profitList[0] = grailed;
-        profitList[1] = offerUp;
-        profitList[2] = ebay;
-        profitList[3] = facebook;
-
-        kb.close();
+        Gui g = new Gui();
+        g.fillProfitsArray();
     }
 
 		

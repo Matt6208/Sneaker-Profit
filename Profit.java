@@ -27,11 +27,19 @@ public abstract class Profit
       return buy;
    }
    
+   public void setBuy(double i){
+      buy = i;
+   }
+
    public double getSell()
    {
       return sell;
    }  
    
+   public void setSell(double i){
+      sell = i;
+   }
+
    public String getRetailer()
    {
       return retailer;
