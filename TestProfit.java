@@ -1,7 +1,3 @@
-//Author: Matt Lorenzo
-//Date: 5/18/2020
-//Final Project
-
 //this is the test class for Profit project
 import java.util.Scanner;
 
