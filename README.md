@@ -1,2 +1,2 @@
-# Sneaker-Profit
-this program compares the profit for selling a sneaker on various websites and apps
+This program was started as a final project for AP CSA and I continued to develop it using grpahics.
+This program compares apps/websites and orders them in best to worst case in selling shoes depending on the buy price, sell price, and other fees.
